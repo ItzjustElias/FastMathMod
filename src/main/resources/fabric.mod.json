@@ -5,7 +5,8 @@
 	"name": "SuperFastMath",
 	"description": "This mod uses precomputed sin and cos via a table and sets them dynamically, which makes math way faster.",
 	"authors": [
-		"Elias"
+		"Elias",
+        "ewv0o"
 	],
 	"contact": {
 		"homepage": "https://github.com/ItzjustElias/FastMathMod/",
@@ -30,7 +31,7 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.16.9",
-		"minecraft": "~1.21.3",
+		"minecraft": "~1.21.8",
 		"java": ">=21",
 		"fabric-api": "*"
 	},
