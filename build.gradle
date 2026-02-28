@@ -36,8 +36,8 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	// FastMath API dependency
-	implementation "org.apache.commons:commons-math3:3.6.1"
+	// Change to include it so it bundles into the mod itself
+	include implementation("org.apache.commons:commons-math3:3.6.1")
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
