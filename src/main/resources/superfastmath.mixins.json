@@ -2,7 +2,9 @@
   "required": true,
   "package": "org.elias.fastmath.mixin",
   "compatibilityLevel": "JAVA_21",
+  "refmap": "superfastmath.refmap.json",
   "mixins": [
+    "BlockPosMixin",
     "MathMixin"
   ],
   "injectors": {
