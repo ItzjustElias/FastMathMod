@@ -1,23 +1,23 @@
 name: build
 on: [pull_request, push]
-
 jobs:
   build:
     strategy:
       matrix:
         java: [ 25 ]
-    runs-on: ubuntu-latest # Using 'latest' ensures you get the most stable environment
+    runs-on: ubuntu-latest
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
 
-      # Combined Validation, JDK Setup, and Caching
-      - name: setup gradle
-        uses: gradle/actions/setup-gradle@v4
+      - name: setup jdk ${{ matrix.java }}
+        uses: actions/setup-java@v4
         with:
           java-version: ${{ matrix.java }}
           distribution: 'microsoft'
-          # cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }} # Optional: for secure caching
+
+      - name: setup gradle
+        uses: gradle/actions/setup-gradle@v4
 
       - name: make gradle wrapper executable
         run: chmod +x ./gradlew
