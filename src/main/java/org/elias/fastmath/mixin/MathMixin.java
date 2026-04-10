@@ -1,11 +1,11 @@
 package org.elias.fastmath.mixin;
 
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
 import org.elias.fastmath.MathUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
-@Mixin(MathHelper.class)
+@Mixin(Mth.class)
 public class MathMixin {
 
 	/**
@@ -58,7 +58,7 @@ public class MathMixin {
 	 * @reason Faster hypotenuse calculation.
 	 */
 	@Overwrite
-	public static double hypot(double a, double b) {
+	public static double length(double a, double b) {
 		return Math.sqrt(a * a + b * b);
 	}
 
@@ -94,17 +94,8 @@ public class MathMixin {
 	 * @reason Fast quintic polynomial fade for Perlin noise.
 	 */
 	@Overwrite
-	public static double perlinFade(double value) {
+	public static double smoothstep(double value) {
 		return value * value * value * (value * (value * 6.0 - 15.0) + 10.0);
-	}
-
-	/**
-	 * @author elias
-	 * @reason Optimized hash for block positions.
-	 */
-	@Overwrite
-	public static long hashCode(int x, int y, int z) {
-		return MathUtil.fastPosHash(x, y, z);
 	}
 
 	/**
