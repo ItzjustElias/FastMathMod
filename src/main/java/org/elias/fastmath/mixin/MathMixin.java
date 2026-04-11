@@ -28,13 +28,12 @@ public class MathMixin {
 
 	/**
 	 * @author elias
-	 * @reason Uses Fast Inverse Square Root approximation.
+	 * @reason Uses Fast Square Root approximation.
 	 */
 	@Overwrite
 	public static float sqrt(float value) {
-		return 1.0f / MathUtil.fastInvSqrt(value);
+		return MathUtil.fastSqrt(value);
 	}
-
 	/**
 	 * @author elias
 	 * @reason Branch-reduced floor implementation for float values.
@@ -64,15 +63,6 @@ public class MathMixin {
 
 	/**
 	 * @author elias
-	 * @reason Optimized atan2 approximation for entity orientation.
-	 */
-	@Overwrite
-	public static double atan2(double y, double x) {
-		return MathUtil.fastAtan2((float) y, (float) x);
-	}
-
-	/**
-	 * @author elias
 	 * @reason Optimized float linear interpolation.
 	 */
 	@Overwrite
@@ -82,21 +72,21 @@ public class MathMixin {
 
 	/**
 	 * @author elias
-	 * @reason Optimized double linear interpolation.
+	 * @reason same as above for doubles
 	 */
 	@Overwrite
 	public static double lerp(double delta, double start, double end) {
-		return start + delta * (end - start);
+		return MathUtil.fastLerpDouble(delta, start, end);
 	}
 
 	/**
 	 * @author elias
-	 * @reason Fast quintic polynomial fade for Perlin noise.
+	 * @reason Fast quintic polynomial fade for Perlin noise. This is same formula as the one on vanilla
 	 */
-	@Overwrite
-	public static double smoothstep(double value) {
-		return value * value * value * (value * (value * 6.0 - 15.0) + 10.0);
-	}
+//	@Overwrite
+//	public static double smoothstep(double value) {
+//		return value * value * value * (value * (value * 6.0 - 15.0) + 10.0);
+//	}
 
 	/**
 	 * @author elias
@@ -104,8 +94,9 @@ public class MathMixin {
 	 */
 	@Overwrite
 	public static int clamp(int value, int min, int max) {
-		return value < min ? min : Math.min(value, max);
-	}
+		if (value < min) return min;
+        return Math.min(value, max);
+    }
 
 	/**
 	 * @author elias

@@ -21,30 +21,8 @@ public class MathUtil {
         return SIN_TABLE[(int) (radians * RAD_TO_INDEX + (TABLE_SIZE / 4)) & MASK];
     }
 
-    public static float fastAtan2(float y, float x) {
-        if (x == 0.0f) {
-            if (y > 0.0f) return 1.5707964f;
-            if (y == 0.0f) return 0.0f;
-            return -1.5707964f;
-        }
-        float z = y / x;
-        float atan;
-        if (Math.abs(z) < 1.0f) {
-            atan = z / (1.0f + 0.280872f * z * z);
-            if (x < 0.0f) return (y < 0.0f) ? atan - 3.1415927f : atan + 3.1415927f;
-        } else {
-            atan = 1.5707964f - z / (z * z + 0.280872f);
-            if (y < 0.0f) return atan - 3.1415927f;
-        }
-        return atan;
-    }
-
-    public static float fastInvSqrt(float x) {
-        float xhalf = 0.5f * x;
-        int i = Float.floatToIntBits(x);
-        i = 0x5f3759df - (i >> 1);
-        x = Float.intBitsToFloat(i);
-        return x * (1.5f - xhalf * x * x);
+    public static float fastSqrt(float value) {
+        return (float) Math.sqrt(value);
     }
 
     public static int fastFloor(double value) {
@@ -52,13 +30,11 @@ public class MathUtil {
         return value < (double) i ? i - 1 : i;
     }
 
-    public static long fastPosHash(int x, int y, int z) {
-        long l = (x * 3129871L) ^ (long)z * 116129781L ^ (long)y;
-        l = l * l * 42317861L + l * 11L;
-        return l >> 16;
+    public static float fastLerp(float delta, float start, float end) {
+        return Math.fma(delta, end - start, start);
     }
 
-    public static float fastLerp(float delta, float start, float end) {
-        return start + delta * (end - start);
+    public static double fastLerpDouble(double delta, double start, double end) {
+        return Math.fma(delta, end - start, start);
     }
 }
