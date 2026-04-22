@@ -21,10 +21,6 @@ public class MathUtil {
         return SIN_TABLE[(int) (radians * RAD_TO_INDEX + (TABLE_SIZE / 4)) & MASK];
     }
 
-    public static float fastSqrt(float value) {
-        return (float) Math.sqrt(value);
-    }
-
     public static int fastFloor(double value) {
         int i = (int) value;
         return value < (double) i ? i - 1 : i;

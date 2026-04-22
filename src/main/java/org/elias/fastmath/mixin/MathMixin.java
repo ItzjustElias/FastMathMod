@@ -28,14 +28,6 @@ public class MathMixin {
 
 	/**
 	 * @author elias
-	 * @reason Uses Fast Square Root approximation.
-	 */
-	@Overwrite
-	public static float sqrt(float value) {
-		return MathUtil.fastSqrt(value);
-	}
-	/**
-	 * @author elias
 	 * @reason Branch-reduced floor implementation for float values.
 	 */
 	@Overwrite
@@ -105,8 +97,8 @@ public class MathMixin {
 	@Overwrite
 	public static float wrapDegrees(float degrees) {
 		float f = degrees % 360.0f;
-		if (f >= 180.0f) f -= 360.0f;
-		if (f < -180.0f) f += 360.0f;
+		if (f >= 180.0f) return f - 360.0f;
+		if (f < -180.0f) return f + 360.0f;
 		return f;
 	}
 }
